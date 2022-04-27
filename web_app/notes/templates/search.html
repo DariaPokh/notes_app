@@ -1,0 +1,39 @@
+{# Шаблон для страницы поиска заметок по запросу пользователя #}
+
+{% extends 'layout.html' %}
+
+{% block title %} Поиск заметки {% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h1>Поиск заметки</h1>
+        <div class="row">
+            {% if notes %}
+                {% for note in notes %}
+                 <div class="col">
+                    <div class="alert-warning border rounded overflow-hidden flex-md-row mb-4">
+                            <div class="col p-4 d-flex flex-column">
+                                <h3 class="mb-0">{{ note.title }}</h3>
+                                <p class="card-text mb-auto">{{ note.text}}</p>
+                                {% if note.img %}
+                                    <img class="image-note" src="{{MEDIA_URL}}{{note.img.url}}">
+                                {% endif %}
+                                <div class="mb-1 text-muted">{{ note.created }}</div>
+                                <a href="{% url 'note_detail' note.id %}"><button class="btn btn-warning">Открыть отдельно</button></a>
+                                <a href="{% url 'note_update' note.id %}"><button class="btn btn-info">Редактировать</button></a>
+                                <a href="{% url 'note_delete' note.id %}"><button class="btn btn-danger">Удалить</button></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert-warning border rounded overflow-hidden flex-md-row mb-4">
+                    <div class="col p-4 d-flex flex-column">
+                        <h3 class="mb-0">Записи не найдены. Попробуйте поменять запрос или создайте подходящую заметку.</h3><br>
+                        <a href="{% url 'create' %}" class="stretched-link"><button class="btn btn-info">Добавить заметку</button></a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

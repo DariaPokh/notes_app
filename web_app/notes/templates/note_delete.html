@@ -1,0 +1,16 @@
+{# Шаблон для страницы удаления заметки #}
+
+{% extends 'layout.html' %}
+
+{% block title %}Удаление заметки{% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h1>Удаление заметки</h1><br>
+        <h2>Вы уверены, что хотите удалить заметку?</h2>
+        <form method="POST" >{% csrf_token %}
+        <a href="{% url 'note_delete' note.id %}"><button class="btn btn-danger">Удалить</button></a>
+    </form>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{# Шаблон для страницы детального отображения заметки #}
+
+{% extends 'layout.html' %}
+
+{% block title %}{{ note.title }}{% endblock %}
+
+{% block content %}
+    <div class="features">
+            <h1 class="mb-0">{{ note.title }}</h1>
+            <h3 class="card-text">{{ note.text}}</h3>
+            {% if note.img %} {# Проверка на наличие изображения в запрашиваемой заметки. При ее наличии возвращается соответствующее изображение #}
+                <img class="image-note" src="{{MEDIA_URL}}{{note.img.url}}">
+            {% endif %}
+            <div class="mb-1 text-muted">{{ note.created }}</div><br>
+            <a href="{% url 'note_update' note.id %}"><button class="btn btn-info">Редактировать</button></a>
+            <a href="{% url 'note_delete' note.id %}"><button class="btn btn-danger">Удалить</button></a><br>
+    </div>
+{% endblock %}

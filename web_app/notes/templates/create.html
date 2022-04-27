@@ -1,0 +1,16 @@
+{# Шаблон страницы для записи заметки #}
+{% extends 'layout.html' %}
+
+{% block title %}Запись заметки{% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h1>Запись заметки</h1>
+        <form method="POST"  enctype="multipart/form-data" class="input-form">{% csrf_token %}
+        {{ form.as_p }}
+        <span>{{ error }}</span>
+        <button class="btn btn-success" type="submit">Добавить заметку</button>
+    </form>
+
+    </div>
+{% endblock %}
